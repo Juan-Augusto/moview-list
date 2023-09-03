@@ -1,0 +1,44 @@
+import React, { useEffect, useState } from "react";
+import { getHomeMovies } from "../services/tmdb";
+import MovieRow from "../components/MovieRow";
+import { TitleText } from "../components/Text/headingTitle";
+import { FeaturedMovie } from "../components/FeaturedMovie";
+import { Spinner } from "../icons/spinner";
+
+export const Home = () => {
+  const [movies, setMovies] = useState([] as any[]);
+  const [loading, setLoading] = useState(true);
+  const getHomePageMovies = async () => {
+    setLoading(true);
+    const allMovies = await getHomeMovies();
+    setMovies(allMovies);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getHomePageMovies();
+  }, []);
+
+  return (
+    <div
+      style={{
+        backgroundColor: "#111",
+      }}
+    >
+      {loading ? (
+        <>Carregando</>
+      ) : (
+        <>
+          <FeaturedMovie
+            item={movies[1]?.items?.results[Math.floor(Math.random() * 20)]}
+          />
+          {movies.map((movie, index) => {
+            return (
+              <MovieRow items={movie.items} title={movie.title} key={index} />
+            );
+          })}
+        </>
+      )}
+    </div>
+  );
+};
