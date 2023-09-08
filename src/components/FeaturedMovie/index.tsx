@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import { getGenres } from "../../services/tmdb";
+import { AddToList } from "../Buttons/addToList";
 export const FeaturedMovie = (prop: any) => {
   const { item } = prop;
   const [genres, setGenres] = useState([] as any[]);
@@ -14,7 +15,7 @@ export const FeaturedMovie = (prop: any) => {
     });
     setGenres(currentGenres);
   };
-
+  console.log(item);
   let firstDate = item.first_air_date
     ? new Date(item.first_air_date)
     : new Date(item.release_date);
@@ -47,9 +48,7 @@ export const FeaturedMovie = (prop: any) => {
           </div>
           <div className="featured--description">{description}</div>
           <div className="featured--buttons">
-            <a href={`/list/add/${item.id}`} className="featured--listbutton">
-              +Minha lista
-            </a>
+            <AddToList currentItemId={item.id} />
           </div>
           <div className="featured--genres">
             <strong>Gêneros: </strong>

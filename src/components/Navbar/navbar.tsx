@@ -10,6 +10,7 @@ import { SearchBar } from "../Inputs/searchBar";
 import { TitleText } from "../Text/headingTitle";
 import { EyeIcon } from "../../icons/eye";
 import { MainTitle } from "./components/mainTitle";
+import { Link } from "react-router-dom";
 
 export const MainNavbar = () => {
   const [openNav, setOpenNav] = useState(false);
@@ -40,17 +41,17 @@ export const MainNavbar = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="/" className="flex items-center">
-          Account
-        </a>
+        <Link to={`/user`}>Listas do usuário</Link>
       </Typography>
     </ul>
   );
 
   return (
-    <Navbar className="bg-black py-2 px-4 lg:px-8 lg:py-4 border-transparent fixed z-10">
+    <Navbar className="bg-black py-2 px-4 lg:px-8 lg:py-4 border-transparent">
       <div className="flex items-center justify-between">
-        <MainTitle />
+        <Link to="/">
+          <MainTitle />
+        </Link>
         <div className="hidden lg:block">{navList}</div>
         <IconButton
           variant="text"

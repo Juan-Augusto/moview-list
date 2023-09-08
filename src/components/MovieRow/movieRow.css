@@ -16,14 +16,52 @@
   display: inline-block;
   width: 150px;
 }
-.movieRow--item img {
+.movieRow--item section {
   width: 100%;
   transform: scale(0.9);
   transition: all ease 0.2s;
+  margin: 0 5px;
 }
-.movieRow--item img:hover {
+.movieRow--item section:hover {
   transform: scale(1);
   cursor: pointer;
+}
+.flip {
+  cursor: pointer;
+  width: 150px;
+  height: 225px;
+  text-align: center;
+  perspective: 600px;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.flip-content {
+  width: 100%;
+  height: 225px;
+  transition: transform 0.4s;
+  transform-style: preserve-3d;
+}
+.flip .flip-content {
+  transform: rotateY(180deg);
+  transition: transform 0.3s;
+}
+.flip-front,
+.flip-back {
+  position: absolute;
+  height: 225px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  backface-visibility: hidden;
+  color: #fff;
+  background-color: rgb(111, 116, 115);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.flip-back {
+  transform: rotateY(180deg);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 .movieRow--Left,
 .movieRow--right {

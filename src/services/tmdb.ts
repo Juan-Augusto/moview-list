@@ -16,14 +16,6 @@ const tmdbGetRequest = async (endpoint: string) => {
 export const getHomeMovies = async () => {
   return [
     {
-      slug: "tv_favorites",
-      title: "Populares na TV",
-      items: await tmdbGetRequest(
-        `/discover/tv?with_network=213&languange=pt-BR&api_key=${API_KEY}`
-      ),
-    },
-
-    {
       slug: "trending",
       title: "Talvez você goste",
       items: await tmdbGetRequest(
@@ -81,8 +73,23 @@ export const getGenres = async () => {
   );
 };
 
-export const getById = async (id: any) => {
+export const getMovieById = async (id: any) => {
   return tmdbGetRequest(
-    `find/${id}?language=pt-BR&external_source=imdb_id&api_key=${API_KEY}`
+    `/movie/${id}?language=pt-BR&external_source=imdb_id&api_key=${API_KEY}`
   );
+};
+
+export const getRelatedMovies = async (id: any) => {
+  return tmdbGetRequest(
+    `/movie/${id}/similar?language=pt-BR&api_key=${API_KEY}`
+  );
+};
+
+export const getAllMoviesFromUser = async (allIds: any) => {
+  const movies = [];
+  for (let i = 0; i < allIds.length; i++) {
+    const movie = await getMovieById(allIds[i]);
+    movies.push(movie);
+  }
+  return movies;
 };

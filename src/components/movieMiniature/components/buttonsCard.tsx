@@ -1,0 +1,25 @@
+import { Link } from "react-router-dom";
+import { AddToList } from "../../Buttons/addToList";
+
+interface ButtonsCardProps {
+  color?: string;
+  movieId: number;
+}
+
+export const ButtonsCard = ({ color = "white", movieId }: ButtonsCardProps) => {
+  const path = window.location.pathname.split("/")[0];
+  return (
+    <div className="flex flex-col">
+      <Link
+        to={`${path}/movie/${movieId}`}
+        className="bg-white hover:bg-gray-100 text-gray-800 font-semibold p-2 border-gray-400 rounded-lg shadow mb-2"
+      >
+        Detalhes
+      </Link>
+      <AddToList
+        className="text-xs font-semibold p-2"
+        currentItemId={movieId}
+      />
+    </div>
+  );
+};
