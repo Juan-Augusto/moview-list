@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_KEY = "8f9419430d6827e16792b47d8bcda1a4";
-const API_BASE = "https://api.themoviedb.org/3";
+const API_KEY = process.env.REACT_APP_API_KEY;
+const API_BASE = process.env.REACT_APP_API_BASE;
 
 const tmdbGetRequest = async (endpoint: string) => {
   const formattedRequest = `${API_BASE}${endpoint}`;

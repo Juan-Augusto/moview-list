@@ -7,6 +7,7 @@ interface MovieMiniatureProps {
   key: number;
   movieId: number;
   className?: string;
+  handleListChange?: () => void;
 }
 
 export const MovieMiniature = ({
@@ -14,6 +15,7 @@ export const MovieMiniature = ({
   imageSrc,
   key,
   movieId,
+  handleListChange = () => {},
 }: MovieMiniatureProps) => {
   const [posterButtonsView, setPosterButtonsView] = useState(false);
 
@@ -27,7 +29,7 @@ export const MovieMiniature = ({
           <img src={imageSrc} />
         </div>
         <div className="flip-back">
-          <ButtonsCard movieId={movieId} />
+          <ButtonsCard movieId={movieId} handleListChange={handleListChange} />
         </div>
       </div>
     </div>

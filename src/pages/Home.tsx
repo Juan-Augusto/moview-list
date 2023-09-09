@@ -3,6 +3,7 @@ import { getHomeMovies } from "../services/tmdb";
 import MovieRow from "../components/MovieRow";
 import { FeaturedMovie } from "../components/FeaturedMovie";
 import { MainNavbar } from "../components/Navbar/navbar";
+import { createUserList, getAllMoviesFromUser } from "../services/moview-api";
 
 export const Home = () => {
   const [movies, setMovies] = useState([] as any[]);
@@ -16,6 +17,7 @@ export const Home = () => {
 
   useEffect(() => {
     getHomePageMovies();
+    getAllMoviesFromUser();
   }, []);
 
   return (

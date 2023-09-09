@@ -4,10 +4,15 @@ import { AddToList } from "../../Buttons/addToList";
 interface ButtonsCardProps {
   color?: string;
   movieId: number;
+  handleListChange?: () => void;
 }
 
-export const ButtonsCard = ({ color = "white", movieId }: ButtonsCardProps) => {
-  const path = window.location.pathname.split("/")[0];
+export const ButtonsCard = ({
+  color = "white",
+  movieId,
+  handleListChange,
+}: ButtonsCardProps) => {
+  const path = window.location.pathname.split("/home")[0];
   return (
     <div className="flex flex-col">
       <Link
@@ -19,6 +24,7 @@ export const ButtonsCard = ({ color = "white", movieId }: ButtonsCardProps) => {
       <AddToList
         className="text-xs font-semibold p-2"
         currentItemId={movieId}
+        handleListChange={handleListChange}
       />
     </div>
   );

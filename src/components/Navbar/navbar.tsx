@@ -3,7 +3,6 @@ import {
   Navbar,
   MobileNav,
   Typography,
-  Button,
   IconButton,
 } from "@material-tailwind/react";
 import { SearchBar } from "../Inputs/searchBar";
@@ -11,10 +10,18 @@ import { TitleText } from "../Text/headingTitle";
 import { EyeIcon } from "../../icons/eye";
 import { MainTitle } from "./components/mainTitle";
 import { Link } from "react-router-dom";
-
+import { Button } from "antd";
+import {
+  createUserList,
+  deleteUserList,
+  updateMovieList,
+} from "../../services/moview-api";
 export const MainNavbar = () => {
   const [openNav, setOpenNav] = useState(false);
-
+  const [hasList, setHasList] = useState(
+    localStorage.getItem("noList") || false
+  );
+  const [noChanges, setNoChanges] = useState(false);
   useEffect(() => {
     window.addEventListener(
       "resize",
@@ -31,7 +38,7 @@ export const MainNavbar = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="/" className="flex items-center">
+        <a href="/home" className="flex items-center">
           Categorias
         </a>
       </Typography>
@@ -43,13 +50,45 @@ export const MainNavbar = () => {
       >
         <Link to={`/user`}>Listas do usuário</Link>
       </Typography>
+      <Button
+        type="primary"
+        className="bg-blue-700 hover:bg-blue-800 disabled:bg-gray-400"
+        disabled={
+          noChanges === true ||
+          localStorage.getItem("previousList") ===
+            localStorage.getItem("myList")
+            ? true
+            : false
+        }
+        onClick={() => {
+          if (localStorage.getItem("noList") === "true") {
+            createUserList((value: any) => setHasList(value));
+          } else {
+            updateMovieList((value: any) => setNoChanges(value));
+          }
+        }}
+      >
+        {localStorage.getItem("noList") === "true" || !hasList
+          ? "Criar Lista com os filmes selecionados"
+          : "Salvar alterações"}
+      </Button>
+      {localStorage.getItem("noList") === "true" || !hasList ? null : (
+        <Button
+          danger
+          onClick={() => {
+            deleteUserList((value: any) => setHasList(value));
+          }}
+        >
+          Deletar lista
+        </Button>
+      )}
     </ul>
   );
 
   return (
     <Navbar className="bg-black py-2 px-4 lg:px-8 lg:py-4 border-transparent">
       <div className="flex items-center justify-between">
-        <Link to="/">
+        <Link to="/home">
           <MainTitle />
         </Link>
         <div className="hidden lg:block">{navList}</div>

@@ -15,7 +15,7 @@ export const FeaturedMovie = (prop: any) => {
     });
     setGenres(currentGenres);
   };
-  console.log(item);
+
   let firstDate = item.first_air_date
     ? new Date(item.first_air_date)
     : new Date(item.release_date);

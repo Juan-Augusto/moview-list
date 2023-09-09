@@ -5,6 +5,11 @@ import { ArrowLeft } from "../../icons/arrows/arrowLeft";
 import { TitleText } from "../Text/headingTitle";
 import { MovieMiniature } from "../movieMiniature";
 
+interface MovieRowProps {
+  title?: string;
+  items?: any;
+}
+
 export default ({
   title = "",
   items = { results: [{ poster_path: "", original_title: "", id: 0 }] },
@@ -30,13 +35,8 @@ export default ({
   return (
     items.results && (
       <div className="movieRow">
-        <TitleText
-          title={title}
-          fontSize="
-      lg:text-2xl
-      "
-        />
-        <div className="movieRow--Left" onClick={handleLeftArrow}>
+        <TitleText title={title} fontSize="lg:text-2xl text-left" />
+        <div className="movieRow--Left " onClick={handleLeftArrow}>
           <ArrowLeft color="white" />
         </div>
         <div className="movieRow--right" onClick={handleRightArrow}>

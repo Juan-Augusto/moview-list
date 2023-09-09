@@ -3,6 +3,8 @@ import { MainNavbar } from "../components/Navbar/navbar";
 import { getAllMoviesFromUser } from "../services/tmdb";
 import { MovieMiniature } from "../components/movieMiniature";
 import { TitleText } from "../components/Text/headingTitle";
+import MovieRow from "../components/MovieRow";
+import { getMovieRecommendations } from "../services/chatGpt";
 
 export const UserAccount = () => {
   const [loading, setLoading] = useState(false);
@@ -24,6 +26,11 @@ export const UserAccount = () => {
     }
   };
 
+  const formatMovieNamesForRecommendation = (movies: any) => {
+    const movieNames = movies.map((movie: any) => movie.original_title);
+    return movieNames;
+  };
+
   useEffect(() => {
     handleGetMoviesSelectedByUser();
   }, []);
@@ -36,7 +43,7 @@ export const UserAccount = () => {
     >
       <MainNavbar />
       <div className="h-screen p-2">
-        <div className="border-white border-2 p-2 flex flex-col justify-center items-center border-solid">
+        <div className="border-white border-2 p-2 flex flex-col border-solid">
           <TitleText title="Minha Lista" />
           {loading ? (
             <div className="flex justify-center items-center h-screen">
@@ -52,6 +59,7 @@ export const UserAccount = () => {
                   key={item.id}
                   movieId={item.id}
                   imageSrc={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
+                  handleListChange={handleGetMoviesSelectedByUser}
                 />
               ))}
             </div>
