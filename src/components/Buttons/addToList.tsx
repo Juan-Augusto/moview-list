@@ -1,13 +1,17 @@
+import { handleListUpdateCheck } from "../../hooks/handleListUpdateCheck";
+
 interface AddToListProps {
   className?: string;
   currentItemId: any;
   handleListChange?: () => void;
+  setNoChanges?: (value: boolean) => void;
 }
 
 export const AddToList = ({
   className = "p-4 font-bold text-lg",
   currentItemId,
   handleListChange = () => {},
+  setNoChanges = (value: boolean) => {},
 }: AddToListProps) => {
   const handleAddToList = () => {
     localStorage.setItem(
@@ -39,6 +43,7 @@ export const AddToList = ({
         } else {
           handleAddToList();
         }
+        handleListUpdateCheck((value: boolean) => setNoChanges(value));
         handleListChange();
       }}
     >

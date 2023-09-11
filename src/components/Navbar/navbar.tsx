@@ -16,12 +16,13 @@ import {
   deleteUserList,
   updateMovieList,
 } from "../../services/moview-api";
-export const MainNavbar = () => {
+export const MainNavbar = (props: any) => {
+  const { noChanges, setNoChanges } = props;
   const [openNav, setOpenNav] = useState(false);
   const [hasList, setHasList] = useState(
     localStorage.getItem("noList") || false
   );
-  const [noChanges, setNoChanges] = useState(false);
+
   useEffect(() => {
     window.addEventListener(
       "resize",
@@ -38,34 +39,19 @@ export const MainNavbar = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="/home" className="flex items-center">
-          Categorias
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
         <Link to={`/user`}>Listas do usuário</Link>
       </Typography>
       <Button
         type="primary"
-        className="bg-blue-700 hover:bg-blue-800 disabled:bg-gray-400"
-        disabled={
-          noChanges === true ||
-          localStorage.getItem("previousList") ===
-            localStorage.getItem("myList")
-            ? true
-            : false
-        }
+        disabled={noChanges}
+        className="bg-blue-700 hover:bg-blue-800 disabled:bg-gray-400 disabled:cursor-not-allowed"
         onClick={() => {
           if (localStorage.getItem("noList") === "true") {
             createUserList((value: any) => setHasList(value));
           } else {
             updateMovieList((value: any) => setNoChanges(value));
           }
+          console.log("noChanges", noChanges);
         }}
       >
         {localStorage.getItem("noList") === "true" || !hasList

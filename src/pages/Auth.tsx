@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 
 export const Auth = () => {
   const cognitoParse =
-    "https://moview.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=6581mmighq62rp3ce3kuc5uj5k&response_type=code&scope=email+openid+phone&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth";
+    process.env.REACT_APP_STAGE === "dev"
+      ? "https://moview.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=6581mmighq62rp3ce3kuc5uj5k&response_type=code&scope=email+openid+phone&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth"
+      : "https://moview.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=heouu2qgm8ifei6vlgnkahpgl&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fd34p2t0grqo7n5.cloudfront.net%2Fauth";
 
   useEffect(() => {
     window.location.href = cognitoParse;

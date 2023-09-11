@@ -6,6 +6,7 @@ export const getCognitoToken = async (code: string) => {
   try {
     let { data } = await axios.post(`${MOVIE_API_URL}/code`, { code });
     data = JSON.parse(data.body);
+    console.log(data);
     const { jwt } = data;
     const { email } = data.body;
     localStorage.setItem("jwt", jwt);
@@ -29,11 +30,7 @@ export const getAllMoviesFromUser = async () => {
     if (data?.data?.allLists) {
       localStorage.setItem("noList", "false");
       localStorage.setItem("previousList", data.data.allLists);
-      if (
-        localStorage.getItem("previousList") === localStorage.getItem("myList")
-      ) {
-        localStorage.setItem("myList", data.data.allLists);
-      }
+      localStorage.setItem("myList", data.data.allLists);
     } else {
       localStorage.setItem("noList", "true");
     }
@@ -94,9 +91,11 @@ export const updateMovieList = async (setNoChanges: any) => {
       { params: queryParams }
     );
     setNoChanges(true);
+    localStorage.setItem("hasNoChange", "true");
     return data;
   } catch (error) {
     console.log(error);
+    localStorage.setItem("hasNoChange", "false");
     setNoChanges(false);
   }
 };

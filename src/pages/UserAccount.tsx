@@ -5,8 +5,12 @@ import { MovieMiniature } from "../components/movieMiniature";
 import { TitleText } from "../components/Text/headingTitle";
 import MovieRow from "../components/MovieRow";
 import { getMovieRecommendations } from "../services/chatGpt";
+import { Footer } from "../components/Footer/Footer";
 
 export const UserAccount = () => {
+  const [noChanges, setNoChanges] = useState(
+    localStorage.getItem("hasNoChange") === "true" ? true : false
+  );
   const [loading, setLoading] = useState(false);
   const [moviesSelectedByUser, setMoviesSelectedByUser] = useState([] as any[]);
   const handleGetMoviesSelectedByUser = async () => {
@@ -41,7 +45,10 @@ export const UserAccount = () => {
         backgroundColor: "#111",
       }}
     >
-      <MainNavbar />
+      <MainNavbar
+        noChanges={noChanges}
+        setNoChanges={(value: boolean) => setNoChanges(value)}
+      />
       <div className="h-screen p-2">
         <div className="border-white border-2 p-2 flex flex-col border-solid">
           <TitleText title="Minha Lista" />
@@ -60,12 +67,14 @@ export const UserAccount = () => {
                   movieId={item.id}
                   imageSrc={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
                   handleListChange={handleGetMoviesSelectedByUser}
+                  setNoChanges={(value: boolean) => setNoChanges(value)}
                 />
               ))}
             </div>
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

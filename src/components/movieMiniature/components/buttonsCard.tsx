@@ -5,12 +5,14 @@ interface ButtonsCardProps {
   color?: string;
   movieId: number;
   handleListChange?: () => void;
+  setNoChanges?: (value: boolean) => void;
 }
 
 export const ButtonsCard = ({
   color = "white",
   movieId,
   handleListChange,
+  setNoChanges = (value: boolean) => {},
 }: ButtonsCardProps) => {
   const path = window.location.pathname.split("/home")[0];
   return (
@@ -25,6 +27,7 @@ export const ButtonsCard = ({
         className="text-xs font-semibold p-2"
         currentItemId={movieId}
         handleListChange={handleListChange}
+        setNoChanges={(value: boolean) => setNoChanges(value)}
       />
     </div>
   );

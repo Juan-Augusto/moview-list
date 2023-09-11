@@ -3,11 +3,15 @@ import { getHomeMovies } from "../services/tmdb";
 import MovieRow from "../components/MovieRow";
 import { FeaturedMovie } from "../components/FeaturedMovie";
 import { MainNavbar } from "../components/Navbar/navbar";
-import { createUserList, getAllMoviesFromUser } from "../services/moview-api";
+import { getAllMoviesFromUser } from "../services/moview-api";
+import { Footer } from "../components/Footer/Footer";
 
 export const Home = () => {
   const [movies, setMovies] = useState([] as any[]);
   const [loading, setLoading] = useState(true);
+  const [noChanges, setNoChanges] = useState(
+    localStorage.getItem("hasNoChange") === "true" ? true : false
+  );
   const getHomePageMovies = async () => {
     setLoading(true);
     const allMovies = await getHomeMovies();
@@ -27,7 +31,10 @@ export const Home = () => {
           backgroundColor: "#111",
         }}
       >
-        <MainNavbar />
+        <MainNavbar
+          noChanges={noChanges}
+          setNoChanges={(value: boolean) => setNoChanges(value)}
+        />
         {loading ? (
           <>Carregando</>
         ) : (
@@ -37,11 +44,17 @@ export const Home = () => {
             />
             {movies.map((movie, index) => {
               return (
-                <MovieRow items={movie.items} title={movie.title} key={index} />
+                <MovieRow
+                  items={movie.items}
+                  title={movie.title}
+                  key={index}
+                  setNoChanges={(value: boolean) => setNoChanges(value)}
+                />
               );
             })}
           </>
         )}
+        <Footer />
       </div>
     </>
   );

@@ -13,6 +13,7 @@ interface MovieRowProps {
 export default ({
   title = "",
   items = { results: [{ poster_path: "", original_title: "", id: 0 }] },
+  setNoChanges = (value: boolean) => {},
 }) => {
   const [scrollX, setScrollX] = useState(0);
   const handleLeftArrow = () => {
@@ -57,6 +58,7 @@ export default ({
                     key={key}
                     imageSrc={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
                     movieId={item.id}
+                    setNoChanges={(value: boolean) => setNoChanges(value)}
                   />
                 </div>
               ))}
