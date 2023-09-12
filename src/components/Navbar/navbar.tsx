@@ -17,7 +17,7 @@ import {
   updateMovieList,
 } from "../../services/moview-api";
 export const MainNavbar = (props: any) => {
-  const { noChanges, setNoChanges } = props;
+  const { noChanges, setNoChanges, handleListChange } = props;
   const [openNav, setOpenNav] = useState(false);
   const [hasList, setHasList] = useState(
     localStorage.getItem("noList") || false
@@ -32,14 +32,14 @@ export const MainNavbar = (props: any) => {
 
   const navList = (
     <ul className="mb-0 mt-0 flex flex-col gap-5 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <SearchBar />
+      <SearchBar handleListChange={handleListChange} />
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <Link to={`/user`}>Listas do usuário</Link>
+        <Link to={`/user`}>Lista do usuário</Link>
       </Typography>
       <Button
         type="primary"

@@ -14,11 +14,10 @@ export const ButtonsCard = ({
   handleListChange,
   setNoChanges = (value: boolean) => {},
 }: ButtonsCardProps) => {
-  const path = window.location.pathname.split("/home")[0];
   return (
     <div className="flex flex-col">
       <Link
-        to={`${path}/movie/${movieId}`}
+        to={`/movie/${movieId}`}
         className="bg-white hover:bg-gray-100 text-gray-800 font-semibold p-2 border-gray-400 rounded-lg shadow mb-2"
       >
         Detalhes

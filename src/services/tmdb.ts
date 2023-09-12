@@ -93,3 +93,9 @@ export const getAllMoviesFromUser = async (allIds: any) => {
   }
   return movies;
 };
+
+export const searchMovie = async (query: string, page: number) => {
+  return tmdbGetRequest(
+    `/search/movie?language=pt-BR&query=${query}&api_key=${API_KEY}&page=${page}`
+  );
+};

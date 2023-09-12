@@ -22,7 +22,6 @@ export const UserAccount = () => {
       setMoviesSelectedByUser(
         allMoviesFromUserList.filter((item: any) => item)
       );
-      console.log(allMoviesFromUserList);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -48,6 +47,7 @@ export const UserAccount = () => {
       <MainNavbar
         noChanges={noChanges}
         setNoChanges={(value: boolean) => setNoChanges(value)}
+        handleListChange={handleGetMoviesSelectedByUser}
       />
       <div className="h-screen p-2">
         <div className="border-white border-2 p-2 flex flex-col border-solid">

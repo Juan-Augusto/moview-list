@@ -1,5 +1,5 @@
 .featured {
-  height: 100vh;
+  height: 70vh;
   color: #fff;
 }
 .featured--vertical {
@@ -16,8 +16,8 @@
   justify-content: center;
   align-items: flex-start;
   padding-left: 30px;
-  padding-bottom: 150px;
-  padding-top: 70px;
+  padding-bottom: 15px;
+  padding-top: 10px;
 }
 .featured--name {
   font-size: 60px;
