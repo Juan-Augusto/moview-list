@@ -35,12 +35,12 @@ export const MovieDetails = () => {
   const handlePosterImage = async () => {
     try {
       const movieData = await axios.get(
-        `https://image.tmdb.org/t/p/w300${currentMovie.poster_path}`
+        `https://image.tmdb.org/t/p/w300${currentMovie?.poster_path}`
       );
       setCurrentMovie(movieData);
       setError(false);
     } catch (error) {
-      console.log(error);
+      console.log("aqui: ", error);
       setError(true);
     }
   };
@@ -80,7 +80,7 @@ export const MovieDetails = () => {
           setNoChanges={(value: boolean) => setNoChanges(value)}
         />
         <div className="mt-10 flex flex-col justify-center items-center">
-          {error ? (
+          {!currentMovie ? (
             <div className="flex flex-col justify-between p-4 leading-normal">
               <h5 className="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">
                 Erro ao carregar filme
@@ -89,8 +89,7 @@ export const MovieDetails = () => {
           ) : loading ? (
             <LoadingCard />
           ) : (
-            // <FeaturedMovie item={currentMovie} />
-            <div className="m-5 rounded-lg flex border-2 shadow-md">
+            <div className="m-5 rounded-lg flex border-2 shadow-md flex-wrap sm:flex-nowrap">
               <img
                 className="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
                 src={`https://image.tmdb.org/t/p/w300${currentMovie.poster_path}`}
